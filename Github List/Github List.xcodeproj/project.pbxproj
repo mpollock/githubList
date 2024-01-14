@@ -19,6 +19,10 @@
 		4CF04D0E2B536E60003339DC /* GithubEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF04D0D2B536E60003339DC /* GithubEndpoints.swift */; };
 		4CF04D102B5376B5003339DC /* SearchUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF04D0F2B5376B5003339DC /* SearchUserModel.swift */; };
 		4CF04D122B53799D003339DC /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF04D112B53799D003339DC /* ContentViewModel.swift */; };
+		4CF04D162B5421F8003339DC /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF04D152B5421F8003339DC /* UserCellView.swift */; };
+		4CF04D182B542219003339DC /* UserCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF04D172B542219003339DC /* UserCellViewModel.swift */; };
+		4CF04D1B2B5426D2003339DC /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF04D1A2B5426D2003339DC /* UserModel.swift */; };
+		4CF04D1D2B542D91003339DC /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF04D1C2B542D91003339DC /* LoadingState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +39,10 @@
 		4CF04D0D2B536E60003339DC /* GithubEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubEndpoints.swift; sourceTree = "<group>"; };
 		4CF04D0F2B5376B5003339DC /* SearchUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserModel.swift; sourceTree = "<group>"; };
 		4CF04D112B53799D003339DC /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		4CF04D152B5421F8003339DC /* UserCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellView.swift; sourceTree = "<group>"; };
+		4CF04D172B542219003339DC /* UserCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellViewModel.swift; sourceTree = "<group>"; };
+		4CF04D1A2B5426D2003339DC /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		4CF04D1C2B542D91003339DC /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +79,10 @@
 				4CF04CF42B5369D5003339DC /* Github_ListApp.swift */,
 				4CF04CF62B5369D5003339DC /* ContentView.swift */,
 				4CF04D112B53799D003339DC /* ContentViewModel.swift */,
+				4CF04D152B5421F8003339DC /* UserCellView.swift */,
+				4CF04D172B542219003339DC /* UserCellViewModel.swift */,
 				4CF04CF82B5369D5003339DC /* Item.swift */,
-				4CF04D0F2B5376B5003339DC /* SearchUserModel.swift */,
+				4CF04D1C2B542D91003339DC /* LoadingState.swift */,
 				4CF04CFA2B5369D6003339DC /* Assets.xcassets */,
 				4CF04CFC2B5369D6003339DC /* Preview Content */,
 			);
@@ -90,6 +100,7 @@
 		4CF04D042B536B8E003339DC /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				4CF04D192B5426C2003339DC /* APIModels */,
 				4CF04D052B536B99003339DC /* APIClient.swift */,
 				4CF04D0D2B536E60003339DC /* GithubEndpoints.swift */,
 				4CF04D0B2B536E11003339DC /* QueryParameter.swift */,
@@ -97,6 +108,15 @@
 				4CF04D092B536DD0003339DC /* URLRequest+Extensions.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		4CF04D192B5426C2003339DC /* APIModels */ = {
+			isa = PBXGroup;
+			children = (
+				4CF04D0F2B5376B5003339DC /* SearchUserModel.swift */,
+				4CF04D1A2B5426D2003339DC /* UserModel.swift */,
+			);
+			path = APIModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,7 +193,11 @@
 				4CF04CF72B5369D5003339DC /* ContentView.swift in Sources */,
 				4CF04CF92B5369D5003339DC /* Item.swift in Sources */,
 				4CF04D102B5376B5003339DC /* SearchUserModel.swift in Sources */,
+				4CF04D162B5421F8003339DC /* UserCellView.swift in Sources */,
+				4CF04D1B2B5426D2003339DC /* UserModel.swift in Sources */,
+				4CF04D182B542219003339DC /* UserCellViewModel.swift in Sources */,
 				4CF04D122B53799D003339DC /* ContentViewModel.swift in Sources */,
+				4CF04D1D2B542D91003339DC /* LoadingState.swift in Sources */,
 				4CF04D0A2B536DD0003339DC /* URLRequest+Extensions.swift in Sources */,
 				4CF04CF52B5369D5003339DC /* Github_ListApp.swift in Sources */,
 				4CF04D0C2B536E11003339DC /* QueryParameter.swift in Sources */,

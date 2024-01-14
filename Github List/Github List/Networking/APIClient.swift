@@ -56,8 +56,10 @@ public enum NetworkError: Error {
     case invalidData
     case requestFailed
     case unauthorized
+}
 
-    public var description: String {
+extension NetworkError: LocalizedError {
+    public var errorDescription: String? {
         switch self {
         case .invalidURL:
             return "Invalid URL"

@@ -14,12 +14,24 @@ struct ContentView: View {
     @StateObject var viewModel = ContentViewModel()
 
     var body: some View {
-        Text(viewModel.data?.totalCount.description ?? "None")
-        Button("Fetch data") {
-            Task {
-                await viewModel.fetchData()
+        Group { // TODO: Add search bar header
+            switch viewModel.state {
+            case .loading:
+                HStack {
+                    Text("Loading")
+                    ProgressView()
+                }
+            case .loaded(let users):
+                List {
+                    ForEach(users) { user in
+                        UserCellView(viewModel: UserCellViewModel(user: user))
+                    }
+                }
+            case .error(let error):
+                Text("Error \(error.localizedDescription)")
             }
         }
+
 //        NavigationSplitView {
 //            List {
 //                ForEach(items) { item in
