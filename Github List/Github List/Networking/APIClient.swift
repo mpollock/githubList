@@ -12,7 +12,6 @@ class APIClient: NSObject, URLSessionDelegate {
     private var urlSession = URLSession(configuration: .default)
 
     func requestData<T>(for urlRequest: URLRequest) async throws -> T where T: Codable {
-
         setConfiguration(request: urlRequest)
 
         return try await Task {
@@ -45,12 +44,10 @@ class APIClient: NSObject, URLSessionDelegate {
 
     func setConfiguration(request: URLRequest) {
         urlSession.configuration.httpAdditionalHeaders = request.allHTTPHeaderFields
-        urlSession.configuration.requestCachePolicy = request.cachePolicy
     }
 }
 
 public enum NetworkError: Error {
-    case invalidURL
     case invalidRequest
     case invalidResponse
     case invalidData
@@ -61,8 +58,6 @@ public enum NetworkError: Error {
 extension NetworkError: LocalizedError {
     public var errorDescription: String? {
         switch self {
-        case .invalidURL:
-            return "Invalid URL"
         case .invalidRequest:
             return "Invalid Request"
         case .invalidResponse:

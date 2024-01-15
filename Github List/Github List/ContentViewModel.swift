@@ -8,12 +8,14 @@
 import Foundation
 
 @MainActor final class ContentViewModel: ObservableObject {
-    @Published var state: LoadingState<[UserModel]> = .loading
+    @Published var state: LoadingState<[UserModel]> = .loaded([])
+    var page: Int = 1
 
-    func fetchData() async {
+    func userSearch(username: String) async {
+        page = 1
         state = .loading
         do {
-            let searchResults = try await GithubEndpoints.shared.searchUsers(query: "mpollock")
+            let searchResults = try await GithubEndpoints.shared.searchUsers(query: username, page: page)
             let users = try await searchResults.items.concurrentMap { item in
                 try await GithubEndpoints.shared.getUser(username: item.login)
             }
@@ -22,12 +24,30 @@ import Foundation
             state = .error(error)
         }
     }
+
+    func getNextUserPage(username: String) async {
+        page += 1
+        do {
+            let searchResults = try await GithubEndpoints.shared.searchUsers(query: username, page: page)
+            let newUsers = try await searchResults.items.concurrentMap { item in
+                try await GithubEndpoints.shared.getUser(username: item.login)
+            }
+            switch state {
+            case .loaded(let users):
+                let totalUsers = users + newUsers
+                state = .loaded(totalUsers)
+            default:
+                return
+            }
+        } catch {
+            state = .error(error)
+        }
+    }
 }
 
-// This is taken from swiftbysundell
+// This is taken from swiftbysundell in order to load our user data concurrently
 // https://www.swiftbysundell.com/articles/async-and-concurrent-forEach-and-map/
 extension Sequence {
-
     func asyncMap<T>(_ transform: (Element) async throws -> T) async rethrows -> [T] {
         var values = [T]()
 

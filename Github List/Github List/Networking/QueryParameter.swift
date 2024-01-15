@@ -23,8 +23,8 @@ public struct QueryParameter: QueryParameterizable {
 }
 
 public extension Array where Element == QueryParameterizable {
-    var toDictionary: JSONObject {
-        return reduce(into: JSONObject()) { dict, param in
+    var toDictionary: [String: Any] {
+        return reduce(into: [String: Any]()) { dict, param in
             dict[param.key] = param.value
         }
     }

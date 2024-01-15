@@ -12,7 +12,7 @@ public extension URLRequest {
     init?(baseURL: String,
           path: String,
           httpMethod: HTTPMethod,
-          parameters: JSONObject? = nil,
+          parameters: [String: Any]? = nil,
           headers: [HTTPHeader]? = nil,
           body: Data? = nil) {
 
@@ -50,14 +50,14 @@ public extension URLRequest {
 }
 
 public extension URLComponents {
-    init?(url: URL, parameters: JSONObject?) {
+    init?(url: URL, parameters: [String: Any]?) {
         self.init(url: url, resolvingAgainstBaseURL: false)
         queryItems = URLQueryItem.queryItems(from: parameters)
     }
 }
 
 public extension URLQueryItem {
-    static func queryItems(from dictionary: JSONObject?) -> [URLQueryItem]? {
+    static func queryItems(from dictionary: [String: Any]?) -> [URLQueryItem]? {
         return dictionary?.map { key, value in
             return URLQueryItem(name: key, value: "\(value)")
         }

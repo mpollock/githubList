@@ -7,30 +7,25 @@
 
 import Foundation
 
-public typealias JSONObject = [String: Any]
-
 public struct Endpoint {
     let path: String
     let method: HTTPMethod
-    var parameters: JSONObject?
+    var parameters: [String: Any]?
     var queryParameters: [QueryParameterizable]?
     let body: Data?
     let baseURL: String
     let additionalHeaders: [HTTPHeader]
-    let useMock: Bool
 
     init (
         path: String = "",
         method: HTTPMethod,
         queryParameters: [String: String]? = nil,
         body: Data? = nil,
-        baseURL: String = "https://api.github.com", // TODO: put this in a config
-        additionalHeaders: [HTTPHeader] = [.authorization(.bearer(token: "fakeToken"))],
-        useMock: Bool = false
+        baseURL: String = APIConfig.BaseURL,
+        additionalHeaders: [HTTPHeader] = [.authorization(.bearer(token: APIConfig.APIToken))]
     ) {
         self.path = path
         self.method = method
-        // TODO: Clean this query params nonsense up
         self.queryParameters = queryParameters?.map {key, value in
             return QueryParameter(key: key, value: value)
         } ?? []
@@ -38,7 +33,6 @@ public struct Endpoint {
         self.body = body
         self.baseURL = baseURL
         self.additionalHeaders = additionalHeaders
-        self.useMock = useMock
     }
 }
 
@@ -72,15 +66,6 @@ public extension Array where Element == HTTPHeader {
         return reduce(into: [String: String]()) { dict, header in
             dict[header.key] = header.value
         }
-    }
-}
-
-extension Endpoint {
-    static func encoded(_ parameters: [String: String]) -> Data? {
-        let string = parameters.map { (key, value) -> String in
-            "\(key)=\(value)"
-        }.joined(separator: "&")
-        return string.data(using: .utf8)
     }
 }
 
